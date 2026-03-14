@@ -1,47 +1,177 @@
 {
   "info": {
-    "name": "SourceMFB Banking API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    "_postman_id": "d0c3dbd0-8232-448f-8892-43d7fb4ba926",
+    "name": "Source MFB",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "23984606",
+    "_collection_link": "https://go.postman.co/collection/23984606-d0c3dbd0-8232-448f-8892-43d7fb4ba926?source=collection_link"
   },
-  "variable": [
-    { "key": "baseUrl", "value": "http://localhost:3000/api" },
-    { "key": "authToken", "value": "" }
-  ],
   "item": [
     {
       "name": "Auth",
       "item": [
         {
           "name": "Register",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": ["pm.collectionVariables.set(\"authToken\", pm.response.json().token);"]
-              }
-            }
-          ],
           "request": {
             "method": "POST",
-            "url": "{{baseUrl}}/auth/register",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}"
+              "raw": "{\n    \"email\":\"Tutor2@gmail.com\",\n    \"password\":\"admin12345\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
             }
           },
           "response": [
             {
-              "name": "200 Success",
-              "status": "Created",
-              "code": 201,
-              "body": "{\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"user\": {\n    \"id\": 1,\n    \"email\": \"user@example.com\",\n    \"accountNumber\": \"1234567890\"\n  }\n}"
-            },
-            {
-              "name": "409 Email taken",
+              "name": "409(Conflict)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\":\"Tutor1@gmail.com\",\n    \"password\":\"admin12345\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/auth/register",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
               "status": "Conflict",
               "code": 409,
-              "body": "{\n  \"statusCode\": 409,\n  \"message\": \"Email already registered\",\n  \"error\": \"Conflict\"\n}"
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "74"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"4a-JTgIuXoq8rerASDEsJP7z9e0+uI\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Mar 2026 01:42:04 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Email already registered\",\n    \"error\": \"Conflict\",\n    \"statusCode\": 409\n}"
+            },
+            {
+              "name": "200(Success)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\":\"Tutor2@gmail.com\",\n    \"password\":\"admin12345\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/auth/register",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "259"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"103-3SF51OGcK6MAR6Aa8xlcOjICKeI\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Mar 2026 01:42:50 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"token\": \"{{vault:json-web-token}}\",\n    \"user\": {\n        \"id\": 2,\n        \"email\": \"Tutor2@gmail.com\",\n        \"accountNumber\": \"7834653469\"\n    }\n}"
             }
           ]
         },
@@ -51,149 +181,1110 @@
             {
               "listen": "test",
               "script": {
-                "exec": ["pm.collectionVariables.set(\"authToken\", pm.response.json().token);"]
+                "exec": [
+                  "const res = pm.response.json();",
+                  "pm.environment.set(\"authToken\", res.token);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
               }
             }
           ],
           "request": {
             "method": "POST",
-            "url": "{{baseUrl}}/auth/login",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}"
+              "raw": "{\n    \"email\":\"Tutor2@gmail.com\",\n    \"password\":\"admin12345\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/auth/login",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
             }
           },
           "response": [
             {
-              "name": "200 Success",
-              "status": "OK",
-              "code": 200,
-              "body": "{\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"user\": {\n    \"id\": 1,\n    \"email\": \"user@example.com\",\n    \"accountNumber\": \"1234567890\"\n  }\n}"
+              "name": "409(Conflict)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\":\"Tutor1@gmail.com\",\n    \"password\":\"admin12345\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/auth/register",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "74"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"4a-JTgIuXoq8rerASDEsJP7z9e0+uI\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Mar 2026 01:42:04 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Email already registered\",\n    \"error\": \"Conflict\",\n    \"statusCode\": 409\n}"
             },
             {
-              "name": "401 Invalid credentials",
-              "status": "Unauthorized",
-              "code": 401,
-              "body": "{\n  \"statusCode\": 401,\n  \"message\": \"Invalid credentials\",\n  \"error\": \"Unauthorized\"\n}"
+              "name": "200(Success)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\":\"Tutor2@gmail.com\",\n    \"password\":\"admin12345\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/auth/register",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "259"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"103-3SF51OGcK6MAR6Aa8xlcOjICKeI\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Mar 2026 01:42:50 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"token\": \"{{vault:json-web-token}}\",\n    \"user\": {\n        \"id\": 2,\n        \"email\": \"Tutor2@gmail.com\",\n        \"accountNumber\": \"7834653469\"\n    }\n}"
             }
           ]
         }
       ]
     },
     {
-      "name": "Wallet",
+      "name": "Wallet & Transfer & Transaction",
       "item": [
         {
-          "name": "Get Wallet",
+          "name": "Webhook(Test)",
           "request": {
-            "method": "GET",
-            "url": "{{baseUrl}}/wallet",
-            "header": [{ "key": "Authorization", "value": "Bearer {{authToken}}" }]
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\"event\": \"charge.completed\",\n\"data\": {\n    \"tx_ref\": \"txn_xyz456\",\n    \"amount\": 5000,\n    \"currency\": \"NGN\",\n    \"customer\": { \"email\": \"Tutor2@gmail.com\" },\n    \"meta\": { \"account_number\": \"7834653469\" }\n}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/webhook/flutterwave",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "webhook",
+                "flutterwave"
+              ]
+            }
           },
           "response": [
             {
-              "name": "200 Success",
-              "status": "OK",
-              "code": 200,
-              "body": "{\n  \"id\": 1,\n  \"accountNumber\": \"1234567890\",\n  \"balance\": 500000,\n  \"balanceFormatted\": \"5000.00\",\n  \"currency\": \"NGN\"\n}"
-            },
-            {
-              "name": "401 Unauthorized",
-              "status": "Unauthorized",
-              "code": 401,
-              "body": "{\n  \"statusCode\": 401,\n  \"message\": \"Unauthorized\",\n  \"error\": \"Unauthorized\"\n}"
+              "name": "200(Success)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\":\"Tutor2@gmail.com\",\n    \"password\":\"admin12345\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/auth/register",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "259"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"103-3SF51OGcK6MAR6Aa8xlcOjICKeI\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Mar 2026 01:42:50 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"token\": \"{{vault:json-web-token}}\",\n    \"user\": {\n        \"id\": 2,\n        \"email\": \"Tutor2@gmail.com\",\n        \"accountNumber\": \"7834653469\"\n    }\n}"
             }
           ]
         },
         {
-          "name": "Deposit",
+          "name": "Wallet",
           "request": {
-            "method": "POST",
-            "url": "{{baseUrl}}/wallet/deposit",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{vault:authorization-secret}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
             "header": [
-              { "key": "Authorization", "value": "Bearer {{authToken}}" },
-              { "key": "Content-Type", "value": "application/json" }
+              {
+                "key": "Authorization",
+                "value": "Bearer $TOKEN"
+              }
             ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"amount\": 5000\n}"
+            "url": {
+              "raw": "{{baseURL}}/api/wallet",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "wallet"
+              ]
             }
           },
           "response": [
             {
-              "name": "201 Success",
-              "status": "Created",
-              "code": 201,
-              "body": "{\n  \"wallet\": {\n    \"id\": 1,\n    \"accountNumber\": \"1234567890\",\n    \"balance\": 500000,\n    \"balanceFormatted\": \"5000.00\",\n    \"currency\": \"NGN\"\n  },\n  \"transaction\": {\n    \"id\": 1,\n    \"reference\": \"uuid-here\",\n    \"type\": \"credit\",\n    \"amount\": 500000,\n    \"balance_after\": 500000,\n    \"description\": \"Deposit\"\n  }\n}"
+              "name": "200(Success)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer $TOKEN"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseURL}}/api/wallet",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "wallet"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "100"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"64-kzlyNPhwOPyCv+cGzK9lxxZXy0M\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Mar 2026 11:11:16 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 2,\n    \"accountNumber\": \"7834653469\",\n    \"balance\": 290000,\n    \"balanceFormatted\": \"2900.00\",\n    \"currency\": \"NGN\"\n}"
             },
             {
-              "name": "400 Invalid amount",
-              "status": "Bad Request",
-              "code": 400,
-              "body": "{\n  \"statusCode\": 400,\n  \"message\": [\"amount must be a positive number\"],\n  \"error\": \"Bad Request\"\n}"
+              "name": "401(Unauthorized)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer $TOKEN"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseURL}}/api/wallet",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "wallet"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "43"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"2b-dGnJzt6gv1nJjX6DJ9RztDWptng\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Mar 2026 11:12:00 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Unauthorized\",\n    \"statusCode\": 401\n}"
+            }
+          ]
+        },
+        {
+          "name": "Transactions history",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer $TOKEN"
+              }
+            ],
+            "url": {
+              "raw": "{{baseURL}}/api/transactions?page=1&limit=2",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "transactions"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "limit",
+                  "value": "2",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200(Success)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer $TOKEN"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseURL}}/api/transactions",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "transactions"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1255"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"4e7-l3I5F/j44lRGEad664lObSx9Vsw\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Mar 2026 11:20:11 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": [\n        {\n            \"id\": 8,\n            \"reference\": \"c187d97e-36d0-48c9-abd8-c90fd4612b9d\",\n            \"type\": \"debit\",\n            \"amount\": 100000,\n            \"amountFormatted\": \"1000.00\",\n            \"balanceAfter\": 195000,\n            \"description\": \"Transfer to 6510532270\",\n            \"counterpartyAccount\": \"6510532270\",\n            \"createdAt\": \"2026-03-14T11:16:42.680Z\"\n        },\n        {\n            \"id\": 7,\n            \"reference\": \"1b631f2f-38cb-4f57-87ed-b8409b8228b6\",\n            \"type\": \"credit\",\n            \"amount\": 5000,\n            \"amountFormatted\": \"50.00\",\n            \"balanceAfter\": 295000,\n            \"description\": \"Deposit\",\n            \"counterpartyAccount\": null,\n            \"createdAt\": \"2026-03-14T11:13:36.403Z\"\n        },\n        {\n            \"id\": 5,\n            \"reference\": \"0c1cdfe7-34d8-4e2d-8c31-587d018cb414\",\n            \"type\": \"debit\",\n            \"amount\": 10000,\n            \"amountFormatted\": \"100.00\",\n            \"balanceAfter\": 290000,\n            \"description\": \"Transfer to 6510532270\",\n            \"counterpartyAccount\": \"6510532270\",\n            \"createdAt\": \"2026-03-14T10:33:54.741Z\"\n        },\n        {\n            \"id\": 3,\n            \"reference\": \"d6be8972-5fe5-40ff-a63c-776ea79e49d4\",\n            \"type\": \"debit\",\n            \"amount\": 200000,\n            \"amountFormatted\": \"2000.00\",\n            \"balanceAfter\": 300000,\n            \"description\": \"Transfer to 6510532270\",\n            \"counterpartyAccount\": \"6510532270\",\n            \"createdAt\": \"2026-03-14T10:17:48.200Z\"\n        },\n        {\n            \"id\": 2,\n            \"reference\": \"txn_xyz456\",\n            \"type\": \"credit\",\n            \"amount\": 500000,\n            \"amountFormatted\": \"5000.00\",\n            \"balanceAfter\": 500000,\n            \"description\": \"Flutterwave deposit\",\n            \"counterpartyAccount\": null,\n            \"createdAt\": \"2026-03-14T10:13:03.713Z\"\n        }\n    ],\n    \"meta\": {\n        \"page\": 1,\n        \"limit\": 20,\n        \"total\": 5\n    }\n}"
+            },
+            {
+              "name": "Transactions history(with pagiatio)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer $TOKEN"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseURL}}/api/transactions?page=1&limit=2",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "transactions"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "530"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"212-nArXyZZDFWqxRgwqIL6jFI1YeD4\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Mar 2026 11:22:04 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": [\n        {\n            \"id\": 8,\n            \"reference\": \"c187d97e-36d0-48c9-abd8-c90fd4612b9d\",\n            \"type\": \"debit\",\n            \"amount\": 100000,\n            \"amountFormatted\": \"1000.00\",\n            \"balanceAfter\": 195000,\n            \"description\": \"Transfer to 6510532270\",\n            \"counterpartyAccount\": \"6510532270\",\n            \"createdAt\": \"2026-03-14T11:16:42.680Z\"\n        },\n        {\n            \"id\": 7,\n            \"reference\": \"1b631f2f-38cb-4f57-87ed-b8409b8228b6\",\n            \"type\": \"credit\",\n            \"amount\": 5000,\n            \"amountFormatted\": \"50.00\",\n            \"balanceAfter\": 295000,\n            \"description\": \"Deposit\",\n            \"counterpartyAccount\": null,\n            \"createdAt\": \"2026-03-14T11:13:36.403Z\"\n        }\n    ],\n    \"meta\": {\n        \"page\": 1,\n        \"limit\": 2,\n        \"total\": 5\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Accout lookup",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer $TOKEN"
+              }
+            ],
+            "url": {
+              "raw": "{{baseURL}}/api/wallet/lookup?recipient=7834653469",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "wallet",
+                "lookup"
+              ],
+              "query": [
+                {
+                  "key": "recipient",
+                  "value": "7834653469"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "400(Not Found)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer $TOKEN"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseURL}}/api/wallet/lookup?recipient=0987654321",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "wallet",
+                    "lookup"
+                  ],
+                  "query": [
+                    {
+                      "key": "recipient",
+                      "value": "0987654321"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "70"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"46-pGQdT0Ev6zw6f3RmDb/pjDA5DiA\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Mar 2026 11:18:39 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Recipient not found\",\n    \"error\": \"Not Found\",\n    \"statusCode\": 404\n}"
+            },
+            {
+              "name": "200(Success)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer $TOKEN"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseURL}}/api/wallet/lookup?recipient=7834653469",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "wallet",
+                    "lookup"
+                  ],
+                  "query": [
+                    {
+                      "key": "recipient",
+                      "value": "7834653469"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "57"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"39-8EAFWwoDdyPpUhtHo+WIv7BwHkM\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Mar 2026 11:19:10 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"email\": \"Tutor2@gmail.com\",\n    \"accountNumber\": \"7834653469\"\n}"
             }
           ]
         },
         {
           "name": "Transfer",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "POST",
-            "url": "{{baseUrl}}/wallet/transfer",
             "header": [
-              { "key": "Authorization", "value": "Bearer {{authToken}}" },
-              { "key": "Content-Type", "value": "application/json" }
+              {
+                "key": "Authorization",
+                "value": "Bearer $TOKEN"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"recipient\": \"0987654321\",\n  \"amount\": 1000\n}"
+              "raw": "{\n    \"recipient\":\"6510532270\",\n    \"amount\":1000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/wallet/transfer",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "wallet",
+                "transfer"
+              ]
             }
           },
           "response": [
             {
-              "name": "201 Success",
-              "status": "Created",
-              "code": 201,
-              "body": "{\n  \"message\": \"Transfer successful\",\n  \"reference\": \"uuid-here\",\n  \"amount\": 1000,\n  \"recipient\": {\n    \"accountNumber\": \"0987654321\",\n    \"email\": \"recipient@example.com\"\n  }\n}"
-            },
-            {
-              "name": "400 Insufficient balance",
-              "status": "Bad Request",
-              "code": 400,
-              "body": "{\n  \"statusCode\": 400,\n  \"message\": \"Insufficient balance\",\n  \"error\": \"Bad Request\"\n}"
-            },
-            {
-              "name": "404 Recipient not found",
+              "name": "404(Not Found)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer $TOKEN"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"recipient\":\"0987654321\",\n    \"amount\":1000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/api/wallet/transfer",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "wallet",
+                    "transfer"
+                  ]
+                }
+              },
               "status": "Not Found",
               "code": 404,
-              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"Recipient not found\",\n  \"error\": \"Not Found\"\n}"
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "70"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"46-pGQdT0Ev6zw6f3RmDb/pjDA5DiA\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Mar 2026 11:15:34 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Recipient not found\",\n    \"error\": \"Not Found\",\n    \"statusCode\": 404\n}"
+            },
+            {
+              "name": "200(Success)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer $TOKEN"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"recipient\":\"6510532270\",\n    \"amount\":1000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/api/wallet/transfer",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "wallet",
+                    "transfer"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "170"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"aa-9irXRewAkJts9xHvvKKW2OG9ogE\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Mar 2026 11:16:42 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Transfer successful\",\n    \"reference\": \"c187d97e-36d0-48c9-abd8-c90fd4612b9d\",\n    \"amount\": 100000,\n    \"recipient\": {\n        \"accountNumber\": \"6510532270\",\n        \"email\": \"Tutor1@gmail.com\"\n    }\n}"
             }
           ]
-        }
-      ]
-    },
-    {
-      "name": "Transactions",
-      "item": [
+        },
         {
-          "name": "List Transactions",
+          "name": "Deposit",
           "request": {
-            "method": "GET",
-            "url": {
-              "raw": "{{baseUrl}}/transactions?page=1&limit=20",
-              "query": [
-                { "key": "page", "value": "1" },
-                { "key": "limit", "value": "20" }
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
               ]
             },
-            "header": [{ "key": "Authorization", "value": "Bearer {{authToken}}" }]
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer $TOKEN"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"amount\":50}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/wallet/deposit",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "wallet",
+                "deposit"
+              ]
+            }
           },
           "response": [
             {
-              "name": "200 Success",
-              "status": "OK",
-              "code": 200,
-              "body": "{\n  \"data\": [\n    {\n      \"id\": 1,\n      \"reference\": \"uuid-here\",\n      \"type\": \"credit\",\n      \"amount\": 500000,\n      \"amountFormatted\": \"5000.00\",\n      \"balanceAfter\": 500000,\n      \"description\": \"Deposit\",\n      \"counterpartyAccount\": null,\n      \"createdAt\": \"2025-01-01T00:00:00.000Z\"\n    }\n  ],\n  \"meta\": { \"page\": 1, \"limit\": 20, \"total\": 1 }\n}"
+              "name": "200(Success)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer $TOKEN"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"amount\":50}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/api/wallet/deposit",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "wallet",
+                    "deposit"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "324"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"144-GNrKIcFOsS0F3ONyPBuXw7xoha0\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 14 Mar 2026 11:13:36 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"wallet\": {\n        \"id\": 2,\n        \"balance\": 295000,\n        \"balanceFormatted\": \"2950.00\",\n        \"currency\": \"NGN\"\n    },\n    \"transaction\": {\n        \"id\": 7,\n        \"reference\": \"1b631f2f-38cb-4f57-87ed-b8409b8228b6\",\n        \"type\": \"credit\",\n        \"amount\": 5000,\n        \"amountFormatted\": \"50.00\",\n        \"balanceAfter\": 295000,\n        \"description\": \"Deposit\",\n        \"counterpartyAccount\": null,\n        \"createdAt\": \"2026-03-14T11:13:36.403Z\"\n    }\n}"
             }
           ]
         }
