@@ -1,11 +1,12 @@
 import {
   Entity, PrimaryGeneratedColumn, Column,
   CreateDateColumn, UpdateDateColumn,
-  OneToOne, JoinColumn, OneToMany,
+  OneToOne, JoinColumn, OneToMany, Index,
 } from 'typeorm';
 import { UserEntity } from '../../users/entities/user.entity';
 import { TransactionEntity } from '../../transactions/entities/transaction.entity';
 
+@Index('idx_wallets_user_id', ['userId'])
 @Entity('wallets')
 export class WalletEntity {
   @PrimaryGeneratedColumn()

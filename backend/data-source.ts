@@ -30,6 +30,6 @@ export const AppDataSource = new DataSource({
     CreateWalletsTable1703000000002,
     CreateTransactionsTable1703000000003,
   ],
-  synchronize: false,
+  synchronize: true,
   logging: true,
 });

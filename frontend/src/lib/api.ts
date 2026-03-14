@@ -152,6 +152,15 @@ export async function apiTransfer(payload: TransferPayload): Promise<TransferRes
   });
 }
 
+export interface RecipientInfo {
+  email: string;
+  accountNumber: string;
+}
+
+export async function apiLookupRecipient(recipient: string): Promise<RecipientInfo> {
+  return request<RecipientInfo>(`/wallet/lookup?recipient=${encodeURIComponent(recipient)}`);
+}
+
 // ─── Transaction Types ────────────────────────────────────────────────────────
 
 export type TransactionType = 'credit' | 'debit';

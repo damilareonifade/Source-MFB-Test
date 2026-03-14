@@ -19,7 +19,7 @@ import { WebhookModule } from './webhook/webhook.module';
       password: process.env.DB_PASS ?? '',
       database: process.env.DB_NAME ?? 'banking_db',
       entities: [UserEntity, WalletEntity, TransactionEntity],
-      synchronize: false,
+      synchronize: true,
       logging: false,
     }),
     UsersModule,

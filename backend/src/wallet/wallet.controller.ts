@@ -1,5 +1,5 @@
 import {
-  Controller, Get, Post, Body, UseGuards, Request,
+  Controller, Get, Post, Body, Query, UseGuards, Request,
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { WalletService } from './wallet.service';
@@ -24,5 +24,10 @@ export class WalletController {
   @Post('transfer')
   transfer(@Request() req: any, @Body() dto: TransferDto) {
     return this.walletService.transfer(req.user.userId, dto);
+  }
+
+  @Get('lookup')
+  lookup(@Query('recipient') recipient: string) {
+    return this.walletService.lookupRecipient(recipient);
   }
 }

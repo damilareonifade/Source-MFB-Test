@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Eye, EyeOff, Copy, ChevronUp, ChevronDown, Plus } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
-import { apiGetWallet, mockVirtualAccount } from '@/lib/api';
+import { apiGetWallet } from '@/lib/api';
 import { Skeleton } from '@/components/ui/Skeleton';
 import SFBText from '@/components/SFBText';
 import { motion } from 'framer-motion';
@@ -18,8 +18,8 @@ export default function AccountOverview() {
   });
 
   const handleCopy = () => {
-    if (mockVirtualAccount.accountNumber) {
-      navigator.clipboard.writeText(mockVirtualAccount.accountNumber);
+    if (wallet?.accountNumber) {
+      navigator.clipboard.writeText(wallet.accountNumber);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
@@ -165,11 +165,11 @@ export default function AccountOverview() {
             </div>
           </div>
           <div>
-            <SFBText size="small" text={mockVirtualAccount.bankName} color="muted" />
+            <SFBText size="small" text="SourceMFB" color="muted" />
             <div className="flex items-center gap-2 mt-1">
               <SFBText
                 size="h4"
-                text={mockVirtualAccount.accountNumber}
+                text={wallet?.accountNumber ?? '—'}
                 fontFamily="display"
                 className="tracking-wide"
               />

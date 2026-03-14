@@ -22,6 +22,13 @@ export class WalletService {
     private readonly usersService: UsersService,
   ) {}
 
+  async lookupRecipient(recipient: string): Promise<{ email: string; accountNumber: string }> {
+    let user = await this.usersService.findByAccountNumber(recipient);
+    if (!user) user = await this.usersService.findByEmail(recipient);
+    if (!user) throw new NotFoundException('Recipient not found');
+    return { email: user.email, accountNumber: user.accountNumber };
+  }
+
   async createForUser(userId: number): Promise<WalletEntity> {
     const wallet = this.walletRepo.create({ userId, balance: 0, currency: 'NGN' });
     return this.walletRepo.save(wallet);

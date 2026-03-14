@@ -1,11 +1,12 @@
 import {
   Entity, PrimaryGeneratedColumn, Column,
-  CreateDateColumn, ManyToOne, JoinColumn,
+  CreateDateColumn, ManyToOne, JoinColumn, Index,
 } from 'typeorm';
 import { WalletEntity } from '../../wallet/entities/wallet.entity';
 
 export type TransactionType = 'credit' | 'debit';
 
+@Index('idx_transactions_wallet_created', ['walletId', 'createdAt'])
 @Entity('transactions')
 export class TransactionEntity {
   @PrimaryGeneratedColumn()
