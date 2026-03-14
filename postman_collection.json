@@ -1,0 +1,203 @@
+{
+  "info": {
+    "name": "SourceMFB Banking API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000/api" },
+    { "key": "authToken", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": ["pm.collectionVariables.set(\"authToken\", pm.response.json().token);"]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/register",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}"
+            }
+          },
+          "response": [
+            {
+              "name": "200 Success",
+              "status": "Created",
+              "code": 201,
+              "body": "{\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"user\": {\n    \"id\": 1,\n    \"email\": \"user@example.com\",\n    \"accountNumber\": \"1234567890\"\n  }\n}"
+            },
+            {
+              "name": "409 Email taken",
+              "status": "Conflict",
+              "code": 409,
+              "body": "{\n  \"statusCode\": 409,\n  \"message\": \"Email already registered\",\n  \"error\": \"Conflict\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": ["pm.collectionVariables.set(\"authToken\", pm.response.json().token);"]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/login",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}"
+            }
+          },
+          "response": [
+            {
+              "name": "200 Success",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"user\": {\n    \"id\": 1,\n    \"email\": \"user@example.com\",\n    \"accountNumber\": \"1234567890\"\n  }\n}"
+            },
+            {
+              "name": "401 Invalid credentials",
+              "status": "Unauthorized",
+              "code": 401,
+              "body": "{\n  \"statusCode\": 401,\n  \"message\": \"Invalid credentials\",\n  \"error\": \"Unauthorized\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Wallet",
+      "item": [
+        {
+          "name": "Get Wallet",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/wallet",
+            "header": [{ "key": "Authorization", "value": "Bearer {{authToken}}" }]
+          },
+          "response": [
+            {
+              "name": "200 Success",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"id\": 1,\n  \"accountNumber\": \"1234567890\",\n  \"balance\": 500000,\n  \"balanceFormatted\": \"5000.00\",\n  \"currency\": \"NGN\"\n}"
+            },
+            {
+              "name": "401 Unauthorized",
+              "status": "Unauthorized",
+              "code": 401,
+              "body": "{\n  \"statusCode\": 401,\n  \"message\": \"Unauthorized\",\n  \"error\": \"Unauthorized\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Deposit",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/wallet/deposit",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 5000\n}"
+            }
+          },
+          "response": [
+            {
+              "name": "201 Success",
+              "status": "Created",
+              "code": 201,
+              "body": "{\n  \"wallet\": {\n    \"id\": 1,\n    \"accountNumber\": \"1234567890\",\n    \"balance\": 500000,\n    \"balanceFormatted\": \"5000.00\",\n    \"currency\": \"NGN\"\n  },\n  \"transaction\": {\n    \"id\": 1,\n    \"reference\": \"uuid-here\",\n    \"type\": \"credit\",\n    \"amount\": 500000,\n    \"balance_after\": 500000,\n    \"description\": \"Deposit\"\n  }\n}"
+            },
+            {
+              "name": "400 Invalid amount",
+              "status": "Bad Request",
+              "code": 400,
+              "body": "{\n  \"statusCode\": 400,\n  \"message\": [\"amount must be a positive number\"],\n  \"error\": \"Bad Request\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Transfer",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/wallet/transfer",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"recipient\": \"0987654321\",\n  \"amount\": 1000\n}"
+            }
+          },
+          "response": [
+            {
+              "name": "201 Success",
+              "status": "Created",
+              "code": 201,
+              "body": "{\n  \"message\": \"Transfer successful\",\n  \"reference\": \"uuid-here\",\n  \"amount\": 1000,\n  \"recipient\": {\n    \"accountNumber\": \"0987654321\",\n    \"email\": \"recipient@example.com\"\n  }\n}"
+            },
+            {
+              "name": "400 Insufficient balance",
+              "status": "Bad Request",
+              "code": 400,
+              "body": "{\n  \"statusCode\": 400,\n  \"message\": \"Insufficient balance\",\n  \"error\": \"Bad Request\"\n}"
+            },
+            {
+              "name": "404 Recipient not found",
+              "status": "Not Found",
+              "code": 404,
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"Recipient not found\",\n  \"error\": \"Not Found\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Transactions",
+      "item": [
+        {
+          "name": "List Transactions",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/transactions?page=1&limit=20",
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "20" }
+              ]
+            },
+            "header": [{ "key": "Authorization", "value": "Bearer {{authToken}}" }]
+          },
+          "response": [
+            {
+              "name": "200 Success",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 1,\n      \"reference\": \"uuid-here\",\n      \"type\": \"credit\",\n      \"amount\": 500000,\n      \"amountFormatted\": \"5000.00\",\n      \"balanceAfter\": 500000,\n      \"description\": \"Deposit\",\n      \"counterpartyAccount\": null,\n      \"createdAt\": \"2025-01-01T00:00:00.000Z\"\n    }\n  ],\n  \"meta\": { \"page\": 1, \"limit\": 20, \"total\": 1 }\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

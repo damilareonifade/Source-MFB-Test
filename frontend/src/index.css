@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg: #F7F9FC;
+    --color-card: #FFFFFF;
+    --color-border: #E2E8F0;
+    --color-text: #0D2137;
+    --color-text-muted: #64748B;
+    --color-input-bg: #F8FAFC;
+  }
+
+  .dark {
+    --color-bg: #07121F;
+    --color-card: #0F1F35;
+    --color-border: #1E3450;
+    --color-text: #E2EBF5;
+    --color-text-muted: #7A9BBD;
+    --color-input-bg: #0D1A2D;
+  }
+
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  .card {
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+  }
+
+  .input-base {
+    background-color: var(--color-input-bg);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    border-radius: 0.5rem;
+    padding: 0.625rem 0.875rem;
+    width: 100%;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9375rem;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .input-base:focus {
+    border-color: #0D2137;
+    box-shadow: 0 0 0 3px rgba(13, 33, 55, 0.08);
+  }
+
+  .dark .input-base:focus {
+    border-color: #F5B700;
+    box-shadow: 0 0 0 3px rgba(245, 183, 0, 0.12);
+  }
+
+  .input-base::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 99px;
+  }
+}

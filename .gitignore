@@ -1,0 +1,11 @@
+# Markdown files (Claude instructions)
+*/Claude.md
+Claude.md
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
