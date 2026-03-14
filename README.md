@@ -102,6 +102,26 @@ This guarantees money never leaves the sender without arriving at the receiver, 
 
 ---
 
+## Repository Structure
+
+```
+/backend       — NestJS API (TypeORM + MySQL)
+/frontend      — React + Vite SPA
+docker-compose.yml
+postman_collection.json
+README.md
+schema.sql
+```
+
+Each sub-directory has its own `.gitignore` that excludes:
+- `node_modules/` and `dist/` — build artifacts
+- `.env` / `.env.*` — secrets (commit `.env.example` instead)
+- IDE folders (`.vscode/`, `.idea/`) and OS files (`.DS_Store`)
+
+The root `.gitignore` covers shared IDE/OS files and the `Claude.md` instruction files.
+
+---
+
 ## Trade-offs & Notes
 
 - **Migrations**: Uses TypeORM migrations (not `synchronize: true`). Run `npm run migration:run` before starting.
